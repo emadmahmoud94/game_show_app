@@ -39,10 +39,9 @@ addPhraseToDisplay(splitPhrase);
 function checkLetter(button) {
     let match = null;
     for(i = 0; i <letter.length; i++) {
-        if(letter[i].textContent === button) {
+        if(letter[i].textContent === button.textContent) {
             const showLetter = letter[i].classList.add('show');
-            return showLetter;
-        }else {
+            match = showLetter;
             return match;
         }
     }
