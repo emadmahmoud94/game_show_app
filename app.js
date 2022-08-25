@@ -5,7 +5,7 @@ const letter = document.getElementsByClassName('letter');
 let missed = 0;
 const ul = document.getElementById('phrase');
 
-const phrases = ['Cleveland Browns', 'Miami Dolphins', 'Houston Texans', 'Las Vegas Raiders', 'Kansas City Chiefs'];
+const phrases = ['Cleveland Browns'.toLowerCase(), 'Miami Dolphins'.toLowerCase(), 'Houston Texans'.toLowerCase(), 'Las Vegas Raiders'.toLowerCase(), 'Kansas City Chiefs'.toLowerCase()];
 
 startButton.addEventListener('click', () => {
     const overlay = document.getElementById('overlay');
