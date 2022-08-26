@@ -2,8 +2,12 @@ const qwerty = document.getElementById('qwerty');
 const phrase = document.getElementById('phrase');
 const startButton = document.querySelector('.btn__reset');
 const letter = document.getElementsByClassName('letter');
-let missed = 0;
 const ul = document.getElementById('phrase');
+const heartImg = document.querySelectorAll('img');
+let missed = 0;
+let match = null;
+const overlay = document.getElementById('overlay');
+const h2 = document.querySelector('h2');
 
 const phrases = ['Cleveland Browns'.toLowerCase(), 'Miami Dolphins'.toLowerCase(), 'Houston Texans'.toLowerCase(), 'Las Vegas Raiders'.toLowerCase(), 'Kansas City Chiefs'.toLowerCase()];
 
@@ -37,14 +41,13 @@ function addPhraseToDisplay() {
 addPhraseToDisplay(splitPhrase);
 
 function checkLetter(button) {
-    let match = null;
     for(i = 0; i <letter.length; i++) {
         if(letter[i].textContent === button.textContent) {
             const showLetter = letter[i].classList.add('show');
             match = showLetter;
-            return match;
         }
     }
+    return match;
 };
 
 qwerty.addEventListener('click', (e) => {
@@ -52,6 +55,30 @@ qwerty.addEventListener('click', (e) => {
     if(e.target.tagName === 'BUTTON' && e.target.className !== 'chosen') {
         clicked.classList.add('chosen');
         const letterFound = checkLetter(clicked);
+        checkWin();
+        if(match === null) {
+            heartImg[missed].src = 'images/lostHeart.png';
+            missed +=1;
+            checkLoss();
+        }
     }
 });
+
+function checkWin(){
+    const show = document.getElementsByClassName('show');
+    const letter = document.getElementsByClassName('letter');
+    if(show.length === letter.length) {
+        h2.innerHTML = 'You Win!';
+        overlay.classList.add('win');
+        overlay.style.display = 'flex';
+    }
+};
+
+function checkLoss() {
+if(missed > 4) {
+    h2.innerHTML = 'You Lose!';
+    overlay.classList.add('lose');
+    overlay.style.display = 'flex';
+}
+};
 
