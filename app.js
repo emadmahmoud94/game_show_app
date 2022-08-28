@@ -64,23 +64,41 @@ qwerty.addEventListener('click', (e) => {
     }
 });
 
+function resetGame() {
+    missed = 0;
+    for (let i = 0; i < heartImg.length; i++) {
+        heartImg[i].src = "images/liveHeart.png";
+    }
+
+    for (let i = 0; i < letter.length; i++) {
+        letter[i].classList.remove('show');
+    }
+
+    let buttons = document.querySelectorAll("button");
+    for (let i = 0; i < buttons.length; i++) {
+        buttons[i].classList.remove('chosen');
+        buttons[i].disabled = false;
+    }
+}
+
 function checkWin(){
     const show = document.getElementsByClassName('show');
-    const letter = document.getElementsByClassName('letter');
     if(show.length === letter.length) {
         h2.innerHTML = 'You Win!';
-        overlay.classList.add('win');
+        overlay.className = 'win';
         overlay.style.display = 'flex';
+        startButton.textContent = "Play again?";
+        resetGame();
     }
 };
 
 function checkLoss() {
 if(missed > 4) {
     h2.innerHTML = 'You Lose!';
-    overlay.classList.add('lose');
+    overlay.className = 'lose';
     overlay.style.display = 'flex';
+    startButton.textContent = "Try Again?";
+    resetGame();
 }
 };
-
-
 
