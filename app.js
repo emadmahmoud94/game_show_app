@@ -5,7 +5,6 @@ const letter = document.getElementsByClassName('letter');
 const ul = document.getElementById('phrase');
 const heartImg = document.querySelectorAll('img');
 let missed = 0;
-let match = null;
 const overlay = document.getElementById('overlay');
 const h2 = document.querySelector('h2');
 
@@ -41,6 +40,7 @@ function addPhraseToDisplay() {
 addPhraseToDisplay(splitPhrase);
 
 function checkLetter(button) {
+    let match = null;
     for(i = 0; i <letter.length; i++) {
         if(letter[i].textContent === button.textContent) {
             const showLetter = letter[i].classList.add('show');
@@ -56,7 +56,7 @@ qwerty.addEventListener('click', (e) => {
         clicked.classList.add('chosen');
         const letterFound = checkLetter(clicked);
         checkWin();
-        if(match === null) {
+        if(letterFound === null) {
             heartImg[missed].src = 'images/lostHeart.png';
             missed +=1;
             checkLoss();
